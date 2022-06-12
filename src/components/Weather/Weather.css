@@ -1,0 +1,26 @@
+.weather-wrapper{
+    background-color: #693250 ;
+    color: #e5dadf ;
+    margin:1rem;
+    width:15rem;
+    height:fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.weather-wrapper *{
+    margin: 0;
+    padding: 0;
+}
+
+.weather-wrapper p{
+    font-size:1rem;
+}
+
+.main-weather{
+    margin-bottom: 0.75rem;
+}
+
+
+

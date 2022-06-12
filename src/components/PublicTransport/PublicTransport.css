@@ -1,0 +1,22 @@
+.PublicTransport {
+  min-height: 216px;
+  background-color: #e1c8c8;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 5px 5px 15px -5px #3a3939;
+  color: rgb(38, 36, 28);
+}
+
+.PublicTransport .trackPlace {
+  display: flex;
+  justify-content: space-between;
+}
+
+@keyframes time {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
