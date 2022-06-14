@@ -19,10 +19,12 @@ const Main = () => {
 
         <div className="main__cards">
           <div className="main__comp">
+            <div className="clock">
             <Clock />
+            </div>
             <Weather />
           </div>
-          {/* <PublicTransport /> */}
+          <PublicTransport />
         </div>
       </div>
     </main>

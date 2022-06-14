@@ -36,52 +36,48 @@ export const PublicTransport = () => {
 
   return (
     <div className="PublicTransport">
-      <div className="trackPlace" style={{ display: "flex" }}>
-        <div className="textTrack">
-          <div>
-            <p>Tunnel-Bana</p>
+      <h3>Departures from Liljeholmen</h3>
+        <div className="container">
+          <div className="ind-container">
+            <h2 className="transport-mode">Tunnel-Bana</h2>
             {departures
               .filter((departure) =>  departure.code == 5)
               .map((departure, index) => {
                 return (
                   <p key={index}>
-                    {departure.line} towards {departure.direction} departs at
+                    {departure.line} - {departure.direction.substring(0,departure.direction.indexOf('T-bana'))} -
                     {departure.time.slice(0, -3)}
                   </p>
                 );
               })}
           </div>
-          <div>
-            <p>Bus</p>
+          <div className="ind-container">
+            <h2 className="transport-mode">Bus</h2>
             {departures
               .filter((departure) =>  departure.code == 6)
               .map((departure, index) => {
                 return (
                   <p key={index}>
-                    {departure.line} towards {departure.direction} departs at
+                    {departure.line} - {departure.direction} -
                     {departure.time.slice(0, -3)}
                   </p>
                 );
               })}
           </div>
-          <div>
-            <p>Tram</p>
+          <div className="ind-container">
+          <h2 className="transport-mode">Tram</h2>
             {departures
               .filter((departure) =>  departure.code == 7)
               .map((departure, index) => {
                 return (
                   <p key={index}>
-                    {departure.line} towards {departure.direction} departs at
+                    {departure.line} - {departure.direction} -
                     {departure.time.slice(0, -3)}
                   </p>
                 );
               })}
           </div>
         </div>
-      </div>
-      <div className="trackPlace" style={{ display: "flex" }}>
-        <div className="textTrack"></div>
-      </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );

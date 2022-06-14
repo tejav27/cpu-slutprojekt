@@ -4,19 +4,27 @@
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 5px 5px 15px -5px #3a3939;
-  color: rgb(38, 36, 28);
+  color: #9C4F77 ;
 }
 
-.PublicTransport .trackPlace {
+.PublicTransport .container{
   display: flex;
   justify-content: space-between;
 }
 
-@keyframes time {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
+.ind-container{
+  box-shadow: 5px 5px 15px -5px #474646;
+  border: 1px solid #9C4F77;
+  margin: 5px;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+@media only screen and (max-width: 855px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.3rem;
   }
 }
+

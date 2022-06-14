@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
+if ('serviceWorker' in navigator&& process.env.NODE_ENV === 'production') {
+  navigator.serviceWorker.register('/service-worker.js')
   .then(() =>
   console.log('Service worker is registered.***********')
   )
   .catch(error =>
-  console.log('Error with register service worker.', error)
+  console.log('Error with register service worker', error)
   );
 }
 

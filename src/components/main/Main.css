@@ -71,9 +71,5 @@ main {
     flex-direction: column;
     margin-bottom: 0.3rem;
   }
-
-  .charts {
-    grid-template-columns: 1fr;
-    margin-top: 30px;
-  }
+  
 }
