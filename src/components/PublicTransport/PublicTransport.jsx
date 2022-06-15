@@ -6,8 +6,8 @@ const TRANSPORT_API_KEY = process.env.REACT_APP_TRANSPORT_API_KEY
 
 export const PublicTransport = () => {
   const [departures, setDepartures] = useState([]);
-
   const [error, setError] = useState("");
+  const [reload, setReload] = useState(true);
 
   useEffect(() => {
     const fetchTime = async () => {
@@ -15,7 +15,6 @@ export const PublicTransport = () => {
         const response = await axios.get(
           `https://api.resrobot.se/v2.1/departureBoard?id=740004046&duration=10&format=json&accessId=${TRANSPORT_API_KEY}`
         );
-
         const dep = response.data.Departure.map((train) => ({
           line:train.Product[0].line,
           stop: train.stop,
@@ -30,9 +29,14 @@ export const PublicTransport = () => {
         if (err.message) setError("Something went wrong!!");
       }
     };
-
     fetchTime();
-  }, []);
+  }, [reload]);
+
+
+  useEffect(() =>{
+    let interval = setInterval(() => setReload(!reload), (1000*60*10))
+    return () => clearInterval(interval)
+})
 
   return (
     <div className="PublicTransport">

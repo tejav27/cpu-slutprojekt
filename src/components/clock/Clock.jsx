@@ -2,7 +2,7 @@ import AnalogClock from "./DashboardClock";
 
 const Clock = () =>{
     let options = {
-        width: "200px",
+        width: "12rem",
         border: true,
         borderColor: "#693250",
         baseColor: "#e5dadf ",
@@ -13,9 +13,9 @@ const Clock = () =>{
           minute: "#693290",
           hour: "#693290",
         },
-        seconds: 1, // set your
-        minutes: 10, // own
-        hours: 22, // time here.
+        seconds: 1, 
+        minutes: 10,
+        hours: 22,
       };
 
       return (

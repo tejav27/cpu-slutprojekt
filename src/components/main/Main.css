@@ -64,6 +64,12 @@ main {
   font-size: 25px;
 }
 
+.clock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 @media only screen and (max-width: 855px) {
   .main__comp {
@@ -71,5 +77,9 @@ main {
     flex-direction: column;
     margin-bottom: 0.3rem;
   }
-  
+
+  main{
+    width: fit-content;
+  }
+
 }

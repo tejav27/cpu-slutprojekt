@@ -13,32 +13,30 @@ export const Weather = () => {
     maxTemp: 0,
     name: "",
   });
+  const [reload, setReload] = useState(true);
+
 
   useEffect(() => {
     const getWeather = async () => {
-      // const response = await axios.get(
-      //     "https://api.openweathermap.org/data/2.5/weather?q=liljeholmen&appid=f5d83d5afb5aa05f7dfcec59980e030f&&units=metric"
-      //   );
-      //   setWeather({
-      //     description: response.data.weather[0].description,
-      //     temp: response.data.main.temp,
-      //     feels: response.data.main.feels_like,
-      //     min: response.data.main.temp_min,
-      //     max: response.data.main.temp_max,
-      //     name: response.data.name,
-      //   });
+      const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=liljeholmen&appid=${WEATHER_API_KEY}&&units=metric`
+        );
         setWeather({
-          description:"sunny",
-          temp: 18,
-          feels: 12,
-          min: 11,
-          max: 17,
-          name: "Fruängen",
+          description: response.data.weather[0].description,
+          temp: response.data.main.temp,
+          feels: response.data.main.feels_like,
+          min: response.data.main.temp_min,
+          max: response.data.main.temp_max,
+          name: response.data.name,
         });
       };
     getWeather();
-  }, []);
+  }, [reload]);
 
+  useEffect(() =>{
+    let interval = setInterval(() => setReload(!reload), (1000*60*60*2))
+    return () => clearInterval(interval)
+})
 
   return (
     <div className="weather-wrapper">

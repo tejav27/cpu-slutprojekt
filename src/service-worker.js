@@ -2,68 +2,47 @@
 
 const statics = self.__WB_MANIFEST;
 const CACHE_NAME = "ithsDashboard";
+const URLS_TO_CACHE = [
+  "/",
+  statics.map((url) => url.url),
+  "https://api.openweathermap.org/data/2.5/weather?q=liljeholmen&appid=f5d83d5afb5aa05f7dfcec59980e030f&&units=metric",
+  "https://api.resrobot.se/v2.1/departureBoard?id=740004046&duration=10&format=json&accessId=59519168-7120-412f-b818-6ae87a631fd1",
+  "/iths-logo.png",
+  "/manifest.json",
+  "/offline.html"
+];
 
 self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      cache.addAll(statics.map((url) => url.url));
-      cache.add("https://api.openweathermap.org/data/2.5/weather?q=liljeholmen&appid=f5d83d5afb5aa05f7dfcec59980e030f&&units=metric")
-      cache.add("https://api.resrobot.se/v2.1/departureBoard?id=740004046&duration=10&format=json&accessId=59519168-7120-412f-b818-6ae87a631fd1")
-      cache.add("/favicon.ico")
-      cache.add("/logo192.png")
-      return cache.add("/manifest.json");
+      return cache.addAll(URLS_TO_CACHE);
     })
   );
   self.skipWaiting();
 });
 
-// self.addEventListener("activate", (event) => {
-//   console.log("service-worker now ready to handle fetches");
-//   event.waitUntil(caches.open(CACHE_NAME).then(() => self.clients.claim()));
-// });
-
-// self.addEventListener("fetch", (event) => {
-//   event.respondWith(fetch(event.request))
-//   // if (!navigator.onLine) {
-//   //   const markup = "<h1>Seems you are offline!.</h1>";
-//   //   const headers = { "Content-Type": "text/html" };
-//   //   const offlineResponse = new Response(markup, { headers });
-//   //   event.respondWith(
-//   //     caches.match(event.request).then((response) => {
-//   //       console.log("cache response ::",response)
-//   //       if (response) {
-//   //         return response;
-//   //       }
-//   //     })
-//   //     );
-//   //     return offlineResponse;
-//   // } else {
-//   //   event.respondWith(fetch(event.request));
-//   // }
-// });
-
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", function (event) {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
-      if (response) {
-        console.log("Found in cache");
-        console.log(event.request);
-        console.log(response);
-        return response;
-      }
-      console.log("Not found in cache");
-      console.log(event.request);
-      return fetch(event.request);
-    })
+    // Try the network
+    fetch(event.request)
+      .then(function (response) {
+        return caches.open(CACHE_NAME).then(function (cache) {
+          // Put in cache if succeeds
+          cache.put(event.request.url, response.clone());
+          return response;
+        });
+      })
+      .catch(function (err) {
+        // Fallback to cache
+        return caches.match(event.request).then(function (res) {
+          if (res === undefined) {
+            // get and return the offline page
+            console.log("fetching offline page")
+            return caches.match("/offline.html")
+          }
+          return res;
+        });
+      })
   );
 });
 
-// self.addEventListener('fetch', (event) => {
-//     event.respondWith(
-//         caches.match(event.request)
-//             .then(() => {
-//                 return fetch(event.request)
-//                     .catch(() => caches.match('offline.html'))
-//             })
-//     )
-// });
