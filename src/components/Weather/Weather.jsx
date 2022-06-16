@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Weather.css";
 import axios from "axios";
-import sun from "../../assets/sun.gif"
+import sun from "../../assets/sun.png"
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY
 
 export const Weather = () => {
@@ -45,8 +45,8 @@ export const Weather = () => {
           src={sun}
           alt="icon" width='40px'
           />
-          <h5>{weather.name}</h5>
-          <h6>{Math.ceil(weather.temp)}°c</h6>
+          <p>{weather.name}</p>
+          <h2>{Math.ceil(weather.temp)}°C</h2>
           <h6>{weather.description}</h6>
       </div>
 

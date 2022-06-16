@@ -1,5 +1,5 @@
 import "./Main.css";
-import hello from "../../assets/hello.svg";
+import hello from "../../assets/hello.png";
 import { PublicTransport } from "../PublicTransport/PublicTransport";
 import { Weather } from "../Weather/Weather";
 import Clock from "../clock/Clock";
