@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Weather.css";
 import axios from "axios";
 import sun from "../../assets/sun.png"
-const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY
 
 export const Weather = () => {
   const [weather, setWeather] = useState({
@@ -18,9 +17,7 @@ export const Weather = () => {
 
   useEffect(() => {
     const getWeather = async () => {
-      const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=liljeholmen&appid=${WEATHER_API_KEY}&&units=metric`
-        );
+      const response = await axios.get(`/.netlify/functions/getWeather`);
         setWeather({
           description: response.data.weather[0].description,
           temp: response.data.main.temp,
