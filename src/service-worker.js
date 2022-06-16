@@ -19,7 +19,6 @@ self.addEventListener("install", function (event) {
     })
   );
   self.skipWaiting();
-  statics.map((url) => console.log(url.url));
 });
 
 self.addEventListener("fetch", function (event) {
@@ -30,7 +29,6 @@ self.addEventListener("fetch", function (event) {
       .then(function (response) {
         return caches.open(CACHE_NAME).then(function (cache) {
           // Put in cache if succeeds
-            console.log("event-req-url", event.request.url)
             cache.put(event.request.url, response.clone());
             return response;
         });
